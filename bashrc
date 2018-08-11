@@ -61,7 +61,7 @@ if [ -d ~/.bash-environment ]; then
 	source ~/.bash-environment/git-prompt.sh
 fi;
 
-PS1='\[\e[38;5;15m\]\A \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$? \[\e[m\]\\$ '
+PS1='\[\e[38;5;15m\]\A \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] \\$ '
 
 
 # enable color support of ls and also add handy aliases
@@ -80,7 +80,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -lFh'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -110,6 +110,29 @@ fi
 
 alias tmux='tmux -2'
 
+export EDITOR=vim
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+export PATH="$PATH:$HOME/scripts"
+export PYTHONPATH="$PYTHONPATH:$HOME/scripts/python"
+export PYTHONDONTWRITEBYTECODE=1
+export PAGER=less
+alias vimPlugins='vim +PluginInstall +qall'
+alias less='less -R'
+alias stripcolors='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
+alias norm='tput cnorm'
+alias invis='tput cinvs'
+
+function averageDelay {
+    while true; do
+        grep 'Posted' "$1" |
+            tail -n20 |
+            awk -F: '{ sum += $6 + $5*60;}
+                 END {if (NR>0) printf "\rAverage Delay: %f", sum / NR}' ;
+         sleep 5;
+    done;
+}
+function watchDeltas() {
+    watch "seeDeltas.sh $1 $2";
+}

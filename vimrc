@@ -19,14 +19,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 " good repeats
 Plugin 'tpope/vim-repeat'
-" Syntax checking 
+" Syntax checking
 Plugin 'scrooloose/syntastic'
 " Status bar
 Plugin 'bling/vim-airline'
 " Colorschemes
 Plugin 'flazz/vim-colorschemes'
 " autocomplete
-Plugin 'davidhalter/jedi-vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -76,7 +76,7 @@ let mapleader = ","
 set modelines=0
 
 " Show line numbers
-set number
+set number relativenumber
 
 " Show file stats
 set ruler
@@ -128,7 +128,7 @@ set ignorecase
 set smartcase
 set showmatch
 " clear search
-map <leader><space> :let @/=''<cr> 
+map <leader><space> :let @/=''<cr>
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
@@ -140,13 +140,14 @@ vnoremap <F1> :set invfullscreen<CR>
 " Formatting
 map <leader>q gqip
 
+set pastetoggle=<F2>
 " Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬,trail:~
 " Uncomment this to enable by default:
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
 " Toggle tabs and EOL
-map <leader>l :set list!<CR> 
+map <leader>l :set list!<CR>
 
 " Color scheme (terminal)
 set t_Co=256
@@ -159,8 +160,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {"mode": "passive"}
 
 let g:jedi#force_py_version = 3
-let g:jedi#show_call_signatures= 2  
-let g:jedi#use_splits_not_buffers = 'left'  
+let g:jedi#show_call_signatures= 2
+let g:jedi#use_splits_not_buffers = 'left'
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 set completeopt=menuone
@@ -183,3 +184,6 @@ endfunction
 command! Wswap :call WinBufSwap()
 nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
+autocmd BufWritePre * %s/\s\+$//e
+set colorcolumn=120
+
