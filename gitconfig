@@ -1,3 +1,5 @@
 [user]
 	name = Joel Christiansen
 	email = greenbadge.jc@gmail.com
+[alias]
+    st = status

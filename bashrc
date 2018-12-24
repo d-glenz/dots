@@ -56,12 +56,57 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-
-if [ -d ~/.bash-environment ]; then
-	source ~/.bash-environment/git-prompt.sh
+# random functions that might be useful on a temp basis
+if [ -d ~/.bash-sources ]; then
+    for f in $(find ~/.bash-sources/*.sh); do
+        source "$f";
+    done
 fi;
 
-PS1='\[\e[38;5;15m\]\A \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] \\$ '
+function timer_start {
+  rc=$?
+  timer=${timer:-$SECONDS}
+  return $rc
+}
+
+function timer_stop {
+  rc=$?
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+  return $rc
+}
+
+function timer_print {
+    rc=$?
+    if [ ${timer_show} -gt "120" ]; then
+        printf "\e[38;5;124m[${timer_show}]\e[m "
+    elif [ ${timer_show} -gt "60" ]; then
+        printf "\e[38;5;214m[${timer_show}]\e[m "
+    else
+        printf "\e[38;5;118m[${timer_show}]\e[m "
+    fi
+    return $rc
+}
+
+trap 'timer_start' DEBUG
+
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+elif [[ "$PROMPT_COMMAND" != *"timer_stop"* ]]; then
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+
+PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] $(timer_print)\\$ '
+DEFAULT_PS1="$PS1"
+
+function set_alerting {
+    case $1 in
+        on) PS1="$PS1\a";;
+       off) PS1="$DEFAULT_PS1";;
+         *) PS1="$PS1\a";;
+    esac
+    return 0;
+}
 
 
 # enable color support of ls and also add handy aliases
@@ -118,21 +163,21 @@ export PATH="$PATH:$HOME/scripts"
 export PYTHONPATH="$PYTHONPATH:$HOME/scripts/python"
 export PYTHONDONTWRITEBYTECODE=1
 export PAGER=less
+export GOPATH=/opt/go
+
+# functional/settings aliases
 alias vimPlugins='vim +PluginInstall +qall'
 alias less='less -R'
 alias stripcolors='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
 alias norm='tput cnorm'
 alias invis='tput cinvs'
+alias raspberry='ssh pi@raspberrypi'
 
-function averageDelay {
-    while true; do
-        grep 'Posted' "$1" |
-            tail -n20 |
-            awk -F: '{ sum += $6 + $5*60;}
-                 END {if (NR>0) printf "\rAverage Delay: %f", sum / NR}' ;
-         sleep 5;
-    done;
-}
-function watchDeltas() {
-    watch "seeDeltas.sh $1 $2";
-}
+# random application settings
+alias spotify='spotify --force-device-scale-factor=2.5'
+alias google-chrome='google-chrome --force-device-scale-factor=2'
+
+
+# convenience aliases
+alias pypiu='python setup.py sdist upload -r local'
+

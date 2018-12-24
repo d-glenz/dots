@@ -1,6 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set exrc
+set secure
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -28,6 +31,8 @@ Plugin 'flazz/vim-colorschemes'
 " autocomplete
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
+" Markdown viewing on ctrl-p
+Plugin 'JamshedVesuna/vim-markdown-preview'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -184,6 +189,8 @@ endfunction
 command! Wswap :call WinBufSwap()
 nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
+nnoremap <F3> :set spell! spelllang=en_us<CR>
 autocmd BufWritePre * %s/\s\+$//e
 set colorcolumn=120
+
 
