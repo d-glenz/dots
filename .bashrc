@@ -79,11 +79,11 @@ function timer_stop {
 function timer_print {
     rc=$?
     if [ ${timer_show} -gt "120" ]; then
-        printf "\e[38;5;124m[${timer_show}]\e[m "
+        printf "\e[38;5;124m[${timer_show}]\e[m"
     elif [ ${timer_show} -gt "60" ]; then
-        printf "\e[38;5;214m[${timer_show}]\e[m "
+        printf "\e[38;5;214m[${timer_show}]\e[m"
     else
-        printf "\e[38;5;118m[${timer_show}]\e[m "
+        printf "\e[38;5;118m[${timer_show}]\e[m"
     fi
     return $rc
 }
