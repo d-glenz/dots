@@ -79,11 +79,13 @@ function timer_stop {
 function timer_print {
     rc=$?
     if [ ${timer_show} -gt "120" ]; then
-        printf "\e[38;5;124m[${timer_show}]\e[m"
+        printf "\e[38;5;124m[${timer_show}]\e[m "
     elif [ ${timer_show} -gt "60" ]; then
-        printf "\e[38;5;214m[${timer_show}]\e[m"
+        printf "\e[38;5;214m[${timer_show}]\e[m "
+    elif [ ${timer_show} -gt "5" ]; then
+        printf "\e[38;5;118m[${timer_show}]\e[m "
     else
-        printf "\e[38;5;118m[${timer_show}]\e[m"
+        printf ""
     fi
     return $rc
 }
@@ -96,7 +98,7 @@ elif [[ "$PROMPT_COMMAND" != *"timer_stop"* ]]; then
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
 
-PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] \[$(timer_print)\] $ '
+PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] \[$(timer_print)\]$ '
 DEFAULT_PS1="$PS1"
 
 function set_alerting {
