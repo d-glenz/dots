@@ -176,6 +176,7 @@ alias raspberry='ssh pi@raspberrypi'
 # random application settings
 alias spotify='spotify --force-device-scale-factor=2.5'
 alias google-chrome='google-chrome --force-device-scale-factor=2'
+alias xclip='xclip -selection clipboard'
 
 
 # convenience aliases
