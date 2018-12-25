@@ -186,6 +186,28 @@ function! WinBufSwap()
       \ "buffer ". lastbuf
 endfunction
 
+" show marks in loc list when hit ` or '
+function! Marks(mark)
+    marks
+    echo('Mark: ')
+
+    " getchar() - prompts user for a single character and returns the chars
+    " ascii representation
+    " nr2char() - converts ASCII `NUMBER TO CHAR'
+
+    let s:mark = nr2char(getchar())
+    " remove the `press any key prompt'
+    redraw
+
+    " build a string which uses the `normal' command plus the var holding the
+    " mark - then eval it.
+    execute "normal! " . a:mark . s:mark
+endfunction
+
+nnoremap ' :call Marks("'")<CR>
+nnoremap ` :call Marks("`")<CR>
+
+
 command! Wswap :call WinBufSwap()
 nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
