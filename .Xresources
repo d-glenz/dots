@@ -45,7 +45,8 @@ urxvt*background:           #404040
 URxvt.allow_bold:           true
 /* URxvt*font: xft:Terminus:pixelsize=36,xft:Inconsolata\ for\ Powerline:pixelsize=36,xft:Monospace:pixelsize=36 */
 /* URxvt*font:  */
-URxvt*font: xft:Hack-Regular:pixelsize=36,xft:Terminus:pixelsize=36,xft:Inconsolata\ for\ Powerline:pixelsize=40,xft:Monospace:pixelsize=36
+URxvt*font: xft:Hack-Regular:pixelsize=36,xft:Font Awesome 5 Brands Regular:pixelsize=36,xft:Terminus:pixelsize=36,xft:Inconsolata\ for\ Powerline:pixelsize=40,xft:Monospace:pixelsize=36
+/* URxvt*font: xft:Font Awesome 5 Brands Regular:pixelsize=36 */
 URxvt*boldFont:    xft:Monospace:pixelsize=36
 
 ! Fix font space
@@ -155,11 +156,3 @@ URxvt.pointerBlank:         true
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme
 ! ------------------------------------------------------------------------------
-rofi.color-enabled: true
-rofi.color-window: #273238, #273238, #1e2529
-rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
-rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
-rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
-
-
-
