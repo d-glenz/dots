@@ -212,8 +212,12 @@ command! Wswap :call WinBufSwap()
 nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
 nnoremap <F3> :set spell! spelllang=en_us<CR>
+nnoremap <leader>m :make<CR>
 autocmd BufWritePre * %s/\s\+$//e
 set colorcolumn=79
 au BufReadPost *.pyi set syntax=python
 
+" pdf hackery
+au BufReadPost *.tex let &makeprg="latexmk -pdf -outdir=$(dirname %) % && pkill --signal=SIGHUP mupdf"
+au BufReadPost *.tex !pgrep "mupdf" || mupdf %:r.pdf &
 
