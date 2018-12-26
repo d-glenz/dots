@@ -93,7 +93,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # install/update vim plugins
-bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers v i m P l u g i n s Return
+# bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers v i m P l u g i n s Return
+bindsym --release $mod+v exec ranger-launch
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -218,8 +219,9 @@ for_window [class="^.*"] border pixel 2
 # smart_gaps on
 
 # start rofi (a program launcher)
-bindsym $mod+semicolon exec rofi -show run  -rnow -run-command "bash -i -c '{cmd}'" -lines 12 -eh 2 -width 100 -padding 800 -opacity "80" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
-bindsym $mod+Shift+semicolon exec SUDO_ASKPASS=~/bin/askpass-rofi rofi -show run  -rnow -run-command "sudo -A '{cmd}'" -lines 12 -eh 2 -width 100 -padding 800 -opacity "80" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+#bindsym $mod+semicolon exec rofi -show run  -rnow -run-command "bash -i -c '{cmd}'"
+bindsym $mod+semicolon exec rofi -show combi -run-command "bash -i -c '{cmd}'"
+bindsym $mod+Shift+semicolon exec rofi -show combi -run-command "sudo -A '{cmd}'"
 
 # key-bindings
 bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +10%"
@@ -237,9 +239,9 @@ bindsym $mod+Print exec scrot "$HOME/Pictures/screenshot $(date +%Y-%m-%d\ %H:%M
 bindsym $mod+m exec gnome-disks
 
 
-exec --no-startup-id google-chrome --force-device-scale-factor=2
-exec --no-startup-id slack
-exec --no-startup-id spotify --force-device-scale-factor=2.5
+# exec --no-startup-id google-chrome --force-device-scale-factor=2
+# exec --no-startup-id slack
+# exec --no-startup-id spotify --force-device-scale-factor=2.5
 # resposible for blur + transitions
 exec --no-startup-id compton -f --blur-method kawase --blur-strength 10
 # wifi management
