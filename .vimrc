@@ -94,7 +94,7 @@ set encoding=utf-8
 
 " Whitespace
 set wrap
-set textwidth=120
+set textwidth=80
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
@@ -187,25 +187,25 @@ function! WinBufSwap()
 endfunction
 
 " show marks in loc list when hit ` or '
-function! Marks(mark)
-    marks
-    echo('Mark: ')
+" function! Marks(mark)
+"     marks
+"     echo('Mark: ')
 
-    " getchar() - prompts user for a single character and returns the chars
-    " ascii representation
-    " nr2char() - converts ASCII `NUMBER TO CHAR'
+"     " getchar() - prompts user for a single character and returns the chars
+"     " ascii representation
+"     " nr2char() - converts ASCII `NUMBER TO CHAR'
 
-    let s:mark = nr2char(getchar())
-    " remove the `press any key prompt'
-    redraw
+"     let s:mark = nr2char(getchar())
+"     " remove the `press any key prompt'
+"     redraw
 
-    " build a string which uses the `normal' command plus the var holding the
-    " mark - then eval it.
-    execute "normal! " . a:mark . s:mark
-endfunction
+"     " build a string which uses the `normal' command plus the var holding the
+"     " mark - then eval it.
+"     execute "normal! " . a:mark . s:mark
+" endfunction
 
-nnoremap ' :call Marks("'")<CR>
-nnoremap ` :call Marks("`")<CR>
+" nnoremap ' :call Marks("'")<CR>
+" nnoremap ` :call Marks("`")<CR>
 
 
 command! Wswap :call WinBufSwap()
@@ -213,6 +213,7 @@ nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
 nnoremap <F3> :set spell! spelllang=en_us<CR>
 autocmd BufWritePre * %s/\s\+$//e
-set colorcolumn=120
+set colorcolumn=79
+au BufReadPost *.pyi set syntax=python
 
 
