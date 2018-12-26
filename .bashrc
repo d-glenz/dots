@@ -98,7 +98,7 @@ elif [[ "$PROMPT_COMMAND" != *"timer_stop"* ]]; then
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
 
-PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]$?\[\e[m\] \[$(timer_print)\]$ '
+PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w \[$(timer_print)\]\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]\n$?\[\e[m\] $ '
 DEFAULT_PS1="$PS1"
 
 function set_alerting {
@@ -154,6 +154,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# colorschemes
+(cat ~/.cache/wal/sequences &)
 
 alias tmux='tmux -2'
 
