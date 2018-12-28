@@ -69,6 +69,7 @@ modules-right = filesystem pulseaudio memory cpu wlan battery temperature date p
 
 tray-position = right
 tray-padding = 2
+tray-maxsize=30
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
