@@ -63,9 +63,9 @@ font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=25;1"
 font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=25;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=25;1"
 
-modules-left = bspwm i3
-modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-center =
+modules-right = music filesystem pulseaudio memory cpu wlan battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -177,9 +177,24 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; label-separator = |
 
 
+[module/music]
+type = custom/script
+format = <label>
+exec = ~/.config/polybar/spotify.sh
+interval = 1
+
+
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+format-offline = Nope
+
+
+label-song = %artist% - %title%
+host = 127.0.0.1
+port = 6600
+
+interval = 2
 
 icon-prev = 
 icon-stop = 
@@ -291,34 +306,6 @@ label-volume-foreground = ${root.foreground}
 
 label-muted =  muted
 label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/alsa]
-type = internal/alsa
-
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
-
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
