@@ -64,8 +64,8 @@ font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=25;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=25;1"
 
 modules-left = i3
-modules-center =
-modules-right = music filesystem pulseaudio memory cpu wlan battery temperature date powermenu
+modules-center = music
+modules-right = filesystem pulseaudio memory cpu wlan battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -181,6 +181,8 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = custom/script
 format = <label>
 exec = ~/.config/polybar/spotify.sh
+format-underline = #1db954
+click-left = playerctl play-pause
 interval = 1
 
 
