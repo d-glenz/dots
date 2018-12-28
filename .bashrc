@@ -79,11 +79,11 @@ function timer_stop {
 function timer_print {
     rc=$?
     if [ ${timer_show} -gt "120" ]; then
-        printf "\e[38;5;124m[${timer_show}]\e[m "
+        printf "\e[38;5;124m[${timer_show}]\e[m \a"
     elif [ ${timer_show} -gt "60" ]; then
-        printf "\e[38;5;214m[${timer_show}]\e[m "
+        printf "\e[38;5;214m[${timer_show}]\e[m \a"
     elif [ ${timer_show} -gt "5" ]; then
-        printf "\e[38;5;118m[${timer_show}]\e[m "
+        printf "\e[38;5;118m[${timer_show}]\e[m \a"
     else
         printf ""
     fi
@@ -98,18 +98,32 @@ elif [[ "$PROMPT_COMMAND" != *"timer_stop"* ]]; then
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
 
-PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]\w \[$(timer_print)\]\[\e[38;5;196m\]$(__git_ps1 " (%s)") \[\e[38;5;166m\]\n$?\[\e[m\] $ '
-DEFAULT_PS1="$PS1"
-
-function set_alerting {
-    case $1 in
-        on) PS1="$PS1\a";;
-       off) PS1="$DEFAULT_PS1";;
-         *) PS1="$PS1\a";;
-    esac
-    return 0;
+function abbrev_pwd {
+    rc=$?
+    renamed_pwd=${PWD/#$HOME/\~};
+    echo -n "${renamed_pwd}" | awk -F "/" '{
+            if (length($0) > 10) {
+                if (NF>5)
+                    print $1 "/" $2 "/" $3 "/.../" $(NF-1) "/" $NF;
+                else if (NF>4)
+                    print $1 "/" $2 "/" $3 "/" $4 "/" $NF;
+                else if (NF>3)
+                    print $1 "/" $2 "/" $3 "/" $NF;
+                else if (NF>2)
+                    print $1 "/" $2 "/" $NF;
+                else
+                    print $1 "/" $NF;
+                }
+            else
+                print $0;
+            }'
+    return $rc
 }
 
+
+PS1='[\A] \[\e[38;5;118m\]\u \[\e[38;5;45m\]$(abbrev_pwd)\
+ \[$(timer_print)\]\[\e[38;5;196m\]$(__git_ps1 "(%s) ")\[\e[38;5;166m\]\
+\n$?\[\e[m\] $ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
