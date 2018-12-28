@@ -28,11 +28,17 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 " Colorschemes
 Plugin 'flazz/vim-colorschemes'
+" wal colorschemes
+Plugin 'dylanaraps/wal.vim'
 " autocomplete
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 " Markdown viewing on ctrl-p
 Plugin 'JamshedVesuna/vim-markdown-preview'
+" tex stuf
+Plugin 'lervag/vimtex'
+" coverage
+Plugin 'mgedmin/coverage-highlight.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -52,6 +58,7 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -76,6 +83,7 @@ filetype plugin on
 
 " TODO: Pick a leader key
 let mapleader = ","
+let maplocalleader='\'
 
 " Security
 set modelines=0
@@ -94,7 +102,7 @@ set encoding=utf-8
 
 " Whitespace
 set wrap
-set textwidth=80
+set textwidth=79
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
@@ -171,6 +179,9 @@ let g:jedi#use_splits_not_buffers = 'left'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 set completeopt=menuone
 
+" vimtex
+let g:vimtex_view_method = "mupdf"
+
 
 nnoremap <leader>st :SyntasticToggleMode<CR>
 " Swap buffers
@@ -208,6 +219,7 @@ endfunction
 " nnoremap ` :call Marks("`")<CR>
 
 
+
 command! Wswap :call WinBufSwap()
 nnoremap <leader>bs :call WinBufSwap()<CR>
 nnoremap ; :
@@ -218,6 +230,10 @@ set colorcolumn=79
 au BufReadPost *.pyi set syntax=python
 
 " pdf hackery
-au BufReadPost *.tex let &makeprg="latexmk -pdf -outdir=$(dirname %) % && pkill --signal=SIGHUP mupdf"
-au BufReadPost *.tex !pgrep "mupdf" || mupdf %:r.pdf &
+" au BufReadPost *.tex let &makeprg="latexmk -pdf -outdir=$(dirname %) % && pkill --signal=SIGHUP mupdf"
+" au BufReadPost *.tex !pgrep "mupdf" || mupdf %:r.pdf &
 
+" coverage
+nnoremap <F7> ::HighlightCoverage<CR>
+
+colorscheme molokai_dark
