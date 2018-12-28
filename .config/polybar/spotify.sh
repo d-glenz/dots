@@ -4,12 +4,11 @@ then
     echo ""
     exit 0
 fi
+
+title=`exec playerctl metadata xesam:title`
+artist=`exec playerctl metadata xesam:artist`
 if [ "$(playerctl status)" = "Playing" ]; then
-  title=`exec playerctl metadata xesam:title`
-  artist=`exec playerctl metadata xesam:artist`
-  echo "$title - $artist"
+  echo " $title - $artist"
 elif [ "$(playerctl status)" = "Paused" ]; then
-  echo ""
-else
-  echo ""
+  echo " $title - $artist"
 fi
