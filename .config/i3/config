@@ -250,7 +250,7 @@ bindsym $mod+m exec gnome-disks
 # exec --no-startup-id slack
 # exec --no-startup-id spotify --force-device-scale-factor=2.5
 # bar at the bottom
-exec --no-startup-id polybar baseline
+exec --no-startup-id polybar baseline --reload
 # resposible for blur + transitions
 exec --no-startup-id compton -f --blur-method kawase --blur-strength 10
 # wifi management
