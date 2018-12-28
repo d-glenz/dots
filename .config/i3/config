@@ -198,17 +198,17 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 
 # bar
-bar {
-  	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	colors {
-		background $bg-color
-        separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-}
+# bar {
+#   	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+# 	colors {
+# 		background $bg-color
+#         separator #757575
+# 		#                  border             background         text
+# 		focused_workspace  $bg-color          $bg-color          $text-color
+# 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+# 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+# 	}
+# }
 
 # GAPS
 # # gaps
@@ -224,12 +224,19 @@ bindsym $mod+semicolon exec rofi -show combi -run-command "bash -i -c '{cmd}'"
 bindsym $mod+Shift+semicolon exec rofi -show combi -run-command "sudo -A '{cmd}'"
 
 # key-bindings
-bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +10%"
-bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -10%"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
 
 bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
+
+# media control
+bindsym XF86AudioPlay exec "playerctl play-pause"
+# bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
+
 
 # bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 bindsym $mod+Shift+x exec betterlockscreen -l dimblur -t "Type password to unlock..."
@@ -242,6 +249,8 @@ bindsym $mod+m exec gnome-disks
 # exec --no-startup-id google-chrome --force-device-scale-factor=2
 # exec --no-startup-id slack
 # exec --no-startup-id spotify --force-device-scale-factor=2.5
+# bar at the bottom
+exec --no-startup-id polybar baseline
 # resposible for blur + transitions
 exec --no-startup-id compton -f --blur-method kawase --blur-strength 10
 # wifi management
@@ -251,12 +260,14 @@ exec --no-startup-id blueman-applet
 # f.lux
 exec --no-startup-id redshift
 exec synclient VertScroll=-111 synclient HorizScroll=-111
-exec_always feh --bg-scale "$HOME/Pictures/wallpaper.png"
+# enable sound
+exec --no-startup-id alsactl init
+# exec_always feh --bg-scale "$HOME/Pictures/wallpaper.png"
+exec_always wal -R
 # natural scrolling
-exec_always xinput set-prop 'DLL07BE:01 06CB:7A13 Touchpad' "Synaptics Scrolling Distance" -30 -30
+exec_always synclient VertScrollDelta=-30 HorizScrollDelta=-30
 # disable tap to click
-exec_always xinput set-prop 'DLL07BE:01 06CB:7A13 Touchpad' 'Synaptics Tap Action' 0
+exec_always synclient MaxTapTime=0
 # enable side-scrolling
-exec_always xinput set-prop 'DLL07BE:01 06CB:7A13 Touchpad' 'Synaptics Two-Finger Scrolling' 1 1
-
+exec_always synclient HorizTwoFingerScroll=1
 
