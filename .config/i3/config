@@ -224,9 +224,13 @@ bindsym $mod+semicolon exec rofi -show combi -run-command "bash -i -c '{cmd}'"
 bindsym $mod+Shift+semicolon exec rofi -show combi -run-command "sudo -A '{cmd}'"
 
 # key-bindings
-bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
-bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
+bindsym XF86AudioRaiseVolume exec \
+            "pactl set-sink-mute @DEFAULT_SINK@  0 && \
+             pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec \
+            "pactl set-sink-mute @DEFAULT_SINK@  0 && \
+             pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
 bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
