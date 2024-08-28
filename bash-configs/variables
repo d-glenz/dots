@@ -1,0 +1,38 @@
+# LS_COLORS {{{1
+LS_COLORS='bd=38;5;196;4:ca=38;5;197;4:cd=38;5;198;4:di=38;5;111;1:do=38;5;197;4:ex=38;5;48:pi=38;5;124;4:fi=0:ln=38;5;246;1:mh=38;5;246;3:no=0:or=38;5;212;3:ow=38;5;197;4;100:sg=38;5;255;4;100:su=38;5;255;4;100;1:so=38;5;196;4:st=38;5;255;3:tw=38;5;255;3;100:*LS_COLORS=38;5;229;1:*README=38;5;221:*README.rst=38;5;221:*README.md=38;5;221:*LICENSE=38;5;221:*COPYING=38;5;221:*INSTALL=38;5;221:*COPYRIGHT=38;5;221:*AUTHORS=38;5;221:*HISTORY=38;5;221:*CONTRIBUTORS=38;5;221:*PATENTS=38;5;221:*VERSION=38;5;221:*NOTICE=38;5;221:*CHANGES=38;5;221:*.log=38;5;224:*.txt=38;5;228:*.hl=38;5;208:*.woim=38;5;208:*.npc=38;5;166:*.etx=38;5;214:*.info=38;5;214:*.markdown=38;5;214:*.md=38;5;214:*.mkd=38;5;214:*.nfo=38;5;214:*.pod=38;5;214:*.rst=38;5;214:*.tex=38;5;214:*.textile=38;5;214:*.bib=38;5;178:*.json=38;5;178:*.jsonl=38;5;178:*.ndjson=38;5;178:*.msg=38;5;178:*.pgn=38;5;178:*.rss=38;5;178:*.xml=38;5;178:*.fxml=38;5;178:*.toml=38;5;178:*.yaml=38;5;178:*.yml=38;5;178:*.RData=38;5;178:*.rdata=38;5;178:*.xsd=38;5;178:*.dtd=38;5;178:*.sgml=38;5;178:*.rng=38;5;178:*.rnc=38;5;178:*.cbr=38;5;128:*.cbz=38;5;128:*.chm=38;5;128:*.djvu=38;5;128:*.pdf=38;5;128:*.PDF=38;5;128:*.mobi=38;5;128:*.epub=38;5;128:*.docm=38;5;127:*.doc=38;5;127:*.docx=38;5;127:*.odb=38;5;127:*.odt=38;5;127:*.rtf=38;5;127:*.odp=38;5;126:*.pps=38;5;126:*.ppt=38;5;126:*.pptx=38;5;126:*.ppts=38;5;126:*.pptxm=38;5;126:*.pptsm=38;5;126:*.csv=38;5;124:*.tsv=38;5;124:*.ods=38;5;124:*.xla=38;5;124:*.xls=38;5;124:*.xlsx=38;5;124:*.xlsxm=38;5;124:*.xltm=38;5;124:*.xltx=38;5;124:*.pages=38;5;127:*.numbers=38;5;124:*.key=38;5;126:*config=38;5;150:*cfg=38;5;150:*conf=38;5;150:*rc=38;5;150:*authorized_keys=38;5;150:*known_hosts=38;5;150:*.ini=38;5;150:*.plist=38;5;150:*.viminfo=38;5;150:*.pcf=38;5;150:*.psf=38;5;150:*.hidden-color-scheme=38;5;190:*.hidden-tmTheme=38;5;190:*.last-run=38;5;190:*.merged-ca-bundle=38;5;190:*.sublime-build=38;5;190:*.sublime-commands=38;5;190:*.sublime-keymap=38;5;190:*.sublime-settings=38;5;190:*.sublime-snippet=38;5;190:*.sublime-project=38;5;190:*.sublime-workspace=38;5;190:*.tmTheme=38;5;190:*.user-ca-bundle=38;5;190:*.epf=38;5;117:*.git=38;5;240:*.gitignore=38;5;238:*.gitattributes=38;5;238:*.gitmodules=38;5;238:*.awk=38;5;151:*.bash=38;5;151:*.bat=38;5;151:*.BAT=38;5;151:*.sed=38;5;151:*.sh=38;5;151:*.zsh=38;5;151:*.vim=38;5;151:*.kak=38;5;151:*.ahk=38;5;69:*.py=38;5;69:*.ipynb=38;5;69:*.rb=38;5;69:*.gemspec=38;5;69:*.pl=38;5;69:*.PL=38;5;69:*.t=38;5;69:*.msql=38;5;67:*.mysql=38;5;67:*.pgsql=38;5;67:*.sql=38;5;67:*.tcl=38;5;68:*.r=38;5;69:*.R=38;5;69:*.gs=38;5;69:*.clj=38;5;69:*.cljs=38;5;69:*.cljc=38;5;69:*.cljw=38;5;69:*.scala=38;5;69:*.dart=38;5;69:*.asm=38;5;69:*.cl=38;5;69:*.lisp=38;5;69:*.rkt=38;5;69:*.lua=38;5;69:*.moon=38;5;69:*.c=38;5;69:*.C=38;5;69:*.h=38;5;69:*.H=38;5;69:*.tcc=38;5;69:*.c++=38;5;69:*.h++=38;5;69:*.hpp=38;5;69:*.hxx=38;5;69:*.ii=38;5;69:*.M=38;5;69:*.m=38;5;69:*.cc=38;5;69:*.cs=38;5;69:*.cp=38;5;69:*.cpp=38;5;69:*.cxx=38;5;69:*.cr=38;5;69:*.go=38;5;69:*.f=38;5;69:*.F=38;5;69:*.for=38;5;69:*.ftn=38;5;69:*.f90=38;5;69:*.F90=38;5;69:*.f95=38;5;69:*.F95=38;5;69:*.f03=38;5;69:*.F03=38;5;69:*.f08=38;5;69:*.F08=38;5;69:*.nim=38;5;69:*.nimble=38;5;69:*.s=38;5;69:*.S=38;5;69:*.rs=38;5;69:*.scpt=38;5;69:*.swift=38;5;69:*.sx=38;5;69:*.vala=38;5;69:*.vapi=38;5;69:*.hi=38;5;69:*.hs=38;5;69:*.lhs=38;5;69:*.agda=38;5;69:*.lagda=38;5;69:*.lagda.tex=38;5;69:*.lagda.rst=38;5;69:*.lagda.md=38;5;69:*.agdai=38;5;69:*.zig=38;5;69:*.v=38;5;69:*.rpn=38;5;69:*.41=38;5;69:*.pyc=38;5;74:*.tf=38;5;117:*.tfstate=38;5;117:*.tfvars=38;5;117:*.css=38;5;173:*.less=38;5;173:*.sass=38;5;173:*.scss=38;5;173:*.htm=38;5;173:*.html=38;5;173:*.jhtm=38;5;173:*.mht=38;5;173:*.eml=38;5;173:*.mustache=38;5;173:*.coffee=38;5;69:*.java=38;5;69:*.js=38;5;69:*.mjs=38;5;69:*.jsm=38;5;69:*.jsp=38;5;69:*.php=38;5;69:*.ctp=38;5;69:*.twig=38;5;69:*.vb=38;5;69:*.vba=38;5;69:*.vbs=38;5;69:*Dockerfile=38;5;150:*.dockerignore=38;5;240:*Makefile=38;5;150:*MANIFEST=38;5;246:*pm_to_blib=38;5;240:*.nix=38;5;150:*.dhall=38;5;150:*.rake=38;5;150:*.am=38;5;150:*.in=38;5;150:*.hin=38;5;150:*.scan=38;5;150:*.m4=38;5;150:*.old=38;5;150:*.out=38;5;150:*.SKIP=38;5;150:*.diff=38;5;225;3:*.patch=38;5;225;1:*.bmp=38;5;171:*.dicom=38;5;171:*.tiff=38;5;171:*.tif=38;5;171:*.TIFF=38;5;171:*.cdr=38;5;171:*.flif=38;5;171:*.gif=38;5;171:*.icns=38;5;171:*.ico=38;5;171:*.jpeg=38;5;171:*.JPG=38;5;171:*.jpg=38;5;171:*.nth=38;5;171:*.png=38;5;171:*.psd=38;5;171:*.pxd=38;5;171:*.pxm=38;5;171:*.xpm=38;5;171:*.webp=38;5;171:*.ai=38;5;177:*.eps=38;5;177:*.epsf=38;5;177:*.drw=38;5;177:*.ps=38;5;177:*.svg=38;5;177:*.avi=38;5;99:*.divx=38;5;99:*.IFO=38;5;99:*.m2v=38;5;99:*.m4v=38;5;99:*.mkv=38;5;99:*.MOV=38;5;99:*.mov=38;5;99:*.mp4=38;5;99:*.mpeg=38;5;99:*.mpg=38;5;99:*.ogm=38;5;99:*.rmvb=38;5;99:*.sample=38;5;99:*.wmv=38;5;99:*.3g2=38;5;98:*.3gp=38;5;98:*.gp3=38;5;98:*.webm=38;5;98:*.gp4=38;5;98:*.asf=38;5;98:*.flv=38;5;98:*.ts=38;5;98:*.ogv=38;5;98:*.f4v=38;5;98:*.VOB=38;5;115;1:*.vob=38;5;115;1:*.
+export LS_COLORS
+# }}}
+# terminfo {{{1
+export TERMINFO=~/.terminfo
+#export TERM=screen-256color
+export TERM=xterm-256color
+export COLORTERM=truecolor
+# }}}
+
+# virtualenvwrapper {{{2
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.11
+# export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
+export WORKON_HOME=$HOME/.virtualenvs
+# }}}
+
+# languages {{{2
+# python
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONSTARTUP=$HOME/.pystartup
+# node
+export N_PREFIX=$HOME/.local/n
+# go
+export GOPATH=$HOME/go
+# c/c++ 
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/tools/libevent/lib
+# }}}
+# editors {{{2
+export HISTCONTROL=ignoreboth:erasedups
+export VISUAL=nvim
+export PAGER='less -MRF'
+# }}}
+# fzf {{{2
+#                                           not builds          not node sillyness              not pycache              NOT PYCACHE                   not hidden                  NOT HIDDEN
+export FZF_DEFAULT_COMMAND='find -not -path  "*/build/*" -not -path  "*/node_modules/*" -not -path "*/__pycache__/*" -not -name __pycache__ -not -path "*/.*/*" -not \( -name ".*" -and -type d \) -not -path "*/.tox/*"'
+# }}}
