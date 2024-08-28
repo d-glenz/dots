@@ -1,0 +1,76 @@
+# vim {{{1
+alias vim='nvim -O'
+alias vimPlugins='vim +PluginInstall +qall'
+# }}}
+
+# tmux {{{1
+# alias tmux="tmux -2"
+alias tmux-ssp='tmux split-window -p 20; tmux split-window -h'
+alias tmux-nw='tmux new-window; tmux-ssp'
+# }}}
+
+# abbreviations/default arguments {{{1
+alias g=git
+alias ls='ls --color=auto'
+alias jq="jq -C"
+alias less="less -MRF"
+if which bat >/dev/null 2>&1; then
+    alias cat='bat';
+fi
+# }}}
+
+# project setup and control logic {{{1
+# temp {{{2
+alias mktmp36="mktmpenv -p /usr/bin/python3.6"
+alias mktmp39="mktmpenv -p /usr/bin/python3.9"
+alias mktmp311="mktmpenv -p /usr/bin/python3.11"
+# }}}
+# np36/39 {{{2
+alias here='l <<<$PWD'
+alias project="gawk -v FS=/ '{ print \$(NF-1) \"/\"  \$(NF) }' <<<\$PWD"
+alias nproject='mkvirtualenv $(project)'
+alias np='nproject && setvirtualenvproject'
+alias setup-venv='pip install -U pip && pip install -U python-lsp-server[flake8,yapf]==1.2.4 pylsp-mypy pyls-isort pylsp-rope'
+
+alias nproject36='nproject -p /usr/bin/python3.6 && setvirtualenvproject && setup-venv'
+alias np36='nproject36'
+
+alias nproject39='nproject -p /usr/bin/python3.9 && setvirtualenvproject && setup-venv'
+alias np39='nproject39'
+
+alias nproject311='nproject -p /usr/bin/python3.11 && setvirtualenvproject && setup-venv'
+alias np311='nproject311'
+
+alias wr='workon $(project)'
+alias rw='rmvirtualenv $(project)'
+# }}}
+# }}}
+
+# etc {{{1
+alias current_date="date +'%Y%m%d'"
+alias now="date +'%Y-%m-%d %H:%M:%S'"
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias mine='sudo chown $USER:$USER'
+alias remake='make clean && make -j12'
+alias make_pretty="find libs/ src/  -name '*.cc' -or -name '*.h' | xargs clang-format -i"
+
+alias grafana-dashboards="psql -h grafana -t -U grafana grafana <<<'select data from dashboard' | jq "
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias ina='sed '"'"'h;:b;$b;/is not absolute/{N;N;d};;$b;P;D'"'"
+alias hk='housekeeper -c $PRODCONFIG_ROOT/apps/common_linux/shared/amat/pushamathkr01/conf/ohc_op_amat_001/ohc_op_amat_001.xml -c $PRODCONFIG_ROOT/apps/common_linux/shared/amat/pushamathkr01/conf/chc_sh_amat_001/chc_sh_amat_001.xml'
+# }}}
+
+# stefano stuff (stolen from http://stash.ams.optiver.com/users/dominikglenz/repos/dotfiles/browse/.bashrc#134){{{1
+# sorting {{{2
+alias t="sort | uniq -c | sort -nr"
+# }}}
+
+# text stream management {{{2
+alias tv='sed "s/.*>\([^<]\+\)<.*/\1/g"'
+alias gtv='sed "s/.*["\"">]\([^"\""<]\+\)["\""<].*/\1/g"'
+alias del='sed /^$/d'
+alias NP='sed -n l10000000'
+alias l='gawk -v FS=/ '\''{ print $NF }'\'
+alias sl='gawk -v FS=/ '\''{ print $(NF-1) }'\'
+alias nocol='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
+# }}}
