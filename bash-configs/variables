@@ -9,6 +9,15 @@ export TERM=xterm-256color
 export COLORTERM=truecolor
 # }}}
 
+# application vars  {{{1
+# PS1 {{{2
+export PS1='[\D{%T}] \[\033[38;5;105m\]\u@$(_cname_prompt)\[\033[38;5;114m\] \w\[\033[38;5;221m\] $(_timer_print) \
+\n$(_git_prompt)\[\033[38;5;214m\]$? \[\033[38;5;105m\]\$\[\033[00m\] '
+#\n$(__git_ps1 "(%s) ")\[\033[38;5;214m\]$? \[\033[38;5;105m\]\$\[\033[00m\] '
+export SIMPLEPS1='[\D{%T}] \[\033[38;5;105m\]\u@\h\[\033[38;5;114m\] \w\[\033[38;5;221m\] \
+\[\033[38;5;214m\]$? \[\033[38;5;105m\]\$\[\033[00m\] '
+# }}}
+
 # virtualenvwrapper {{{2
 # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.11
 # export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
