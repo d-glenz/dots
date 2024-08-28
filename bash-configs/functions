@@ -1,0 +1,110 @@
+# random definitions {{{1
+fcd () # {{{2
+{
+    # fuzzy cd
+    fztarget="$(fzf "$@")"
+    if [ $? -ne 0 ]; then  # this is dumb
+        return 1
+    fi
+
+    if [ -f $fztarget ]; then
+        target="$(dirname "$fztarget")"
+    else
+        target="$fztarget"
+    fi;
+    if [ $? -ne 0 ]; then  # this is dumber
+        return 1
+    fi
+    cd "$target"
+}  # }}}
+# prompt stuff {{{2
+function _git_prompt {  
+    local rc=$?
+    if  git rev-parse HEAD >/dev/null 2>&1 ; then
+        printf "(%s %s) " $(__git_ps1 "%s") $(git rev-parse --short HEAD )
+    fi
+    return $rc
+}
+function _cname_prompt {
+    local rc=$?
+    local cn="$(cat /etc/hostname)"
+    if [ -f /etc/cname ]; then
+        local hn=$cn
+        cn="$(cat /etc/cname)"
+        if [[ "unknown" = $cn ]]; then
+            cn=$hn
+        fi
+    fi
+    printf "$cn"
+    return $rc
+}  # }}}
+# cdw & autocomplete {{{2
+function cdw {  
+    if [[ -d  "/data/$USER/workspaces/$1" ]]; then
+        cd "/data/$USER/workspaces/$1"
+    elif [[ -d  "$HOME/workspaces/$1" ]]; then
+        cd "$HOME/workspaces/$1"
+    else
+        return 1
+    fi;
+} 
+_cdw () {
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    k=0
+    for rootdir in "/data/$USER/workspaces" "/$HOME/workspaces" ; do
+        for j in $( compgen -f "$rootdir/$cur" ); do # loop trough the possible completions
+            if [ -d "$j" ]; then
+                j="${j}/"
+            else
+                continue
+            fi
+            COMPREPLY[k++]=${j#$rootdir/} # remove the directory prefix from the array
+        done
+    done
+    return 0
+}  # }}}
+use_devtoolset_8 ()  # {{{2
+{
+    if [ -d /opt/rh/devtoolset-8 ]; then
+        . /opt/rh/llvm-toolset-7/enable;
+        . /opt/rh/devtoolset-8/enable;
+    fi
+}  # }}}
+running_tally() {  # {{{2
+    # Counts the number of LINES in which $1 appears in $2
+    a=0;
+    tail -f "$2" -n500 | while read -r line; do
+        echo "$line" | grep "$1" > /dev/null && ((a++)) && echo -ne "\rFound: $a     ";
+    done;
+}  # }}}
+function git { # {{{
+    command git "$@";
+    local rc=$?
+    if [[ "$@" != *"rev-parse"* && ${GIT_RECORD_COMMANDS+x} ]]; then
+        echo "[`date +%H:%M:%S`] ($rc) git $@" >> ~/git.log;
+    fi
+    return $rc
+} #  }}}
+aa ()
+{
+    FS=${1:-\ };
+    shift;
+    gawk -v FS="$FS" "{ print \$${1:-1} }"
+};
+cdf ()  # {{{2
+{
+    cd $(dirname $1)
+}  # }}}
+function pydebug() { python -m pdb "$(which $1)" "${@:2}";}
+watchtask(){ # {{{2
+    while true; do 
+        cols=$(tput cols);
+        lines=$(tput lines);
+        tout=$(clear; task $1 rc.defaultwidth:$cols rc.defaultheight:$lines rc._forcecolor:on 2>/dev/null); 
+        echo "$tout"; 
+        sleep 1
+    done;
+} # }}}
+# }}}
