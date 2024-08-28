@@ -108,3 +108,58 @@ watchtask(){ # {{{2
     done;
 } # }}}
 # }}}
+
+
+# toolbox stuff {{{1
+
+unset -f ltf LT lt ltc ltcd
+
+ltf ()
+{
+    # Convenience function used by LT and ltc
+    gawk -v RS='\n\n\n' -v FS=' \\| ' -v OFS=' | ' -v regex="$(gawk -v FS=/ '{ regex = "(/" $2 "/)?"; for (i = 3; i < NF; i++) regex = "(" regex $i "/)?"; regex = regex $NF "/" } ; END { print regex }' <<<"$(pwd)")" '{ n = split($4, a, /\n+/); m = split($1, b, /\n/); for (i = 2; i < m; i++) { split(b[i], c, /\t/); sub("^" regex, "", c[2]); print c[1] "      => " c[2] } if (b[m] "") print substr(b[m], 1, 9), $2, $3, a[1]; for (i = 1; i <= n; i++) { if (a[i] ~ /commit/) commit = substr(a[i], 8, 9); else if (a[i] ~ /^[ \t]/) { sub(/^[ \t]+/, "", a[i]); if (commit "") { print "         ", commit; commit = "" } else print "            " a[i] } } }'
+}
+
+LT ()
+{
+    # Git changes in the last 24h by default, implemented in the current dir. and its sudirs.
+    [[ $(git rev-parse --abbrev-ref HEAD) = master ]] && {
+        git pull --ff-only --quiet origin || echo 'Current HEAD is not up-to-date and the merge cannot be resolved as a fast-forward' 1>&2
+    };
+    local since=${1:-yesterday}; shift;
+    local until=${1:-today};
+    git log --reverse --pretty=tformat:'%H | %<(21)%an | %cd | %B%n' --since="$since" --until="$until" --date=local . | ltf
+}
+
+lt ()
+{
+    # Git changes in the last 24h by default, implemented in the current dir. and its sudirs. - only PR comments
+    LT "${1:+$1}" "${2:+$2}" | /usr/bin/grep --color=auto -v ^\ 
+}
+
+ltc ()
+{
+    # Git changes matching regexp in the last 24h by default, implemented in the current dir. and its sudirs. - it shows files affected by the change(s)
+    [[ $(git rev-parse --abbrev-ref HEAD) = master ]] && {
+        git pull --ff-only --quiet origin || echo 'Current HEAD is not up-to-date and the merge cannot be resolved as a fast-forward' 1>&2
+    };
+    CHANGE=${1:-Merge pull request};
+    shift;
+    local since=${1:-yesterday};
+    shift;
+    git log --reverse --name-status --since="$since" -E --grep="$CHANGE" --pretty=tformat:'%H | %<(21)%an | %cd | %B%n' . | ltf
+}
+
+ltcd ()
+{
+    # Git changes matching regexp in the last 24h by default, implemented in the current dir. and its sudirs. - it shows actual differences
+    local CHANGE=${1:-Merge pull request};
+    shift;
+    local since=${1:-yesterday};
+    shift;
+    ltc "$CHANGE" "$since" | gawk -v FS=' \\| ' -v OFS=\| 'NF == 4 { sha1 = $1; next } ; NF == 1 && /^[^\tD]/ { split($0, a, /=> /); filename = a[2]; print sha1, filename }' | parallel --colsep \\\| --keep-order 'test -e {2} && ! test -d {2} && git diff -U0 {1}{^,} {2}'
+}
+
+export -f LT lt ltc ltcd
+
+# }}}
