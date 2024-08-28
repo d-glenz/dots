@@ -4,4 +4,77 @@
 [alias]
     st = status
 [push]
-    default = simple
+    default = current
+    recurseSubmodules = check
+[fixup]
+    menu = fzf --height 40 --reverse
+    commit = true
+[core] pager = less -MRF
+    editor = vim
+    excludesfile = ~/.gitignore_global
+    sharedRepository = group
+    filemode = true
+    autocrlf = input
+[help]
+    autocorrect = 10
+[alias]
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+    lga = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg = !"git lg1"
+    lc = log ORIG_HEAD.. --stat --no-merges
+    changed = diff master..HEAD
+    diffstat = diff --stat -r
+    untrack = rm --cache
+    undo = reset --hard HEAD
+    uncommit = reset --mixed HEAD^
+    mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; }; f "
+    clean-merged = "!f(){ git branch --merged  | egrep -v \"(^\\\\*|master|dev)\" | xargs git branch -d; }; f"
+    recommit = commit --amend --no-edit
+    code-review = difftool origin/master
+    supdate = submodule update --remote --merge
+    sdiff = !git diff && git submodule foreach 'git diff'
+    find-breaking = "!f(){ git bisect start && git bisect bad && git bisect good $(git describe --abbrev=0) && git bisect run $@; }; f"
+    up = !git remote update -p && git merge --ff-only @{u}
+    rup = remote update -p
+    pk = log -p -G
+    st = status
+    br = branch
+    a = add
+    new-branch = "!f(){ git checkout -b $(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1); }; f"
+    cpush = "!f(){ : git push; git push origin $(git rev-parse --abbrev-ref HEAD) $@; }; f"
+    cpull = "!f(){ : git push; git pull origin $(git rev-parse --abbrev-ref HEAD) $@; }; f"
+    push-pr = "!f(){ : git push; git push $1; git create-pr $@; }; f"
+    conflicted = "!f(){ command vim -O +Conflicted $@; }; f"
+    co = checkout
+    corelease = "!f(){ git checkout $(git describe --tags $(git rev-list --tags --max-count=1)); }; f"
+    commit-m = commit
+    checkout-when = "!f(){ git checkout \"$(git rev-list -1 \"$@\")\"; }; f"
+    d = diff
+    stat = diff --stat
+    cleanup = "!f(){ git reset --hard HEAD && git clean \"$@\"; }; f"
+    squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+    ; summary = "!f(){ if [ $# -eq 0 ]; then branch=HEAD; else branch=origin/$1; fi; git diff $(git merge-base origin/master $branch)..$branch | grep '^[+-][^+-]' | sort | uniq -c | sort -nr; }; f"
+    pccp = "!f() { git prodconfig-commit && git cpush; }; f"
+[diff]
+    tool = vimdiff
+    algorithm = patience
+[difftool]
+    prompt = false
+[merge]
+    conflictstyle = diff3
+[pull]
+    ff = only
+    default = current
+[init]
+    templatedir = ~/.git-templates
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge --skip -- %f
+    required = true
+    # process = git-lfs filter-process --skip
+[status]
+    showUntrackedFiles = all
+[showbranch]
+    default = --topo-order
+    default = heads/*
