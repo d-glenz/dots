@@ -1,0 +1,43 @@
+# vim: syntax=bash filetype=bash foldmethod=marker foldlevel=0:
+
+unset _timer
+_timer_show=0
+function _timer_start {
+    local rc=$?
+    if [ -z "$_AT_PROMPT" ]; then
+        return
+    fi
+    unset _AT_PROMPT
+
+    _timer=${_timer:-$SECONDS};
+    return $rc
+}
+
+function _wrap_trap {
+    local old_=$1;
+    _timer_start;
+    : "$old_";
+}
+trap '_wrap_trap "$_"' DEBUG
+
+function _timer_stop {
+    local rc=$?
+    _AT_PROMPT=1
+
+    _timer_show=$((SECONDS - _timer)); unset _timer;
+    return $rc
+}
+
+PROMPT_COMMAND='_timer_stop; echo -ne "\033]0;$(pwd | rev | cut -d/ -f-2 | rev)\007"'
+# if [[ $PROMPT_COMMAND == "" ]]; then
+#     PROMPT_COMMAND="_timer_stop"
+# elif [[ $PROMPT_COMMAND != *"_timer_stop"* ]]; then
+#     PROMPT_COMMAND="$PROMPT_COMMAND; _timer_stop"
+# fi
+function _timer_print {
+    local rc=$?
+    if [[ "$_timer_show" -gt "${PROMPT_TIMER_MIN:=1}" ]]; then
+        printf "[${_timer_show}s]\a";
+    fi
+    return $rc
+}
